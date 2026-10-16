@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Лаб. 2 · Варіант 10 · Конхоїда Нікомеда</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+<canvas id="ov"></canvas>
+
+<header id="title">
+    <h1>Конхоїда Нікомеда <i>(x − a)²(x² + y²) = b²x²</i></h1>
+    <p>Лабораторна робота №2 · варіант 10 · Петренко Крістіна Юріївна</p>
+</header>
+
+<div class="col" id="colL">
+    <section class="card">
+        <h2 data-fold>Параметри кривої</h2>
+        <div class="cbody">
+            <div class="sl"><label>a</label><input id="a" type="range" min="0.5" max="6" step="0.05" value="2"><output id="aO">2</output></div>
+            <div class="sl"><label>b</label><input id="b" type="range" min="0.5" max="8" step="0.05" value="3"><output id="bO">3</output></div>
+            <div class="two"><button id="btnDefault" type="button">Default</button><button id="btnAnim" type="button" class="hot">▶ Animate</button></div>
+            <div class="sl"><label>швидк.</label><input id="speed" type="range" min="1" max="10" value="4"><output id="spO">4</output></div>
+            <p class="note">Анімація змінює обидва параметри з різними частотами — петля то з'являється (b &gt; a), то зникає.</p>
+        </div>
+    </section>
+    <section class="card">
+        <h2 data-fold>Точка M на кривій</h2>
+        <div class="cbody">
+            <div class="sl"><label>φ</label><input id="phi" type="range" min="-89" max="269" step="0.1" value="40"><output id="phiO">40°</output></div>
+            <div class="two"><button id="pPrev" type="button">« prev</button><button id="pNext" type="button">next »</button></div>
+            <label class="chk"><input id="vTan" type="checkbox" checked> tangent</label>
+            <label class="chk"><input id="vNor" type="checkbox" checked> normal</label>
+            <label class="chk"><input id="vAsy" type="checkbox" checked> asymptote x = a</label>
+            <label class="chk"><input id="vCirc" type="checkbox"> osculating circle</label>
+            <label class="chk"><input id="vLoop" type="checkbox" checked> fill loop</label>
+            <p class="note">Точку M можна перетягувати мишею вздовж кривої.</p>
+        </div>
+    </section>
+</div>
+
+<div class="col" id="colR">
+    <section class="card">
+        <h2 data-fold>Обчислення</h2>
+        <div class="cbody">
+            <div class="kv"><label>φ₁°<input id="c1" type="number" value="-60"></label><label>φ₂°<input id="c2" type="number" value="60"></label></div>
+            <div class="two"><button id="presetLoop" type="button">Loop</button><button id="presetAll" type="button">±60°</button></div>
+            <pre id="calc"></pre>
+        </div>
+    </section>
+    <section class="card">
+        <h2 data-fold>Евклідові перетворення</h2>
+        <div class="cbody">
+            <h3>Shift</h3>
+            <div class="kv"><label>X<input id="shx" type="number" value="0" step="0.5"></label><label>Y<input id="shy" type="number" value="0" step="0.5"></label></div>
+            <h3>Rotation</h3>
+            <div class="kv"><label>x<input id="rx" type="number" value="0" step="0.5"></label><label>y<input id="ry" type="number" value="0" step="0.5"></label></div>
+            <div class="sl"><label>angle</label><input id="ra" type="range" min="-180" max="180" value="0"><output id="raO">0°</output></div>
+            <button id="btnReset" type="button" class="full">Reset</button>
+        </div>
+    </section>
+</div>
+
+<footer id="keys">
+    <span><kbd>drag</kbd> панорамування / переміщення M</span><span><kbd>колесо</kbd> масштаб до курсору</span><span><kbd>Shift+клік</kbd> центр обертання</span><span><kbd>A</kbd> анімація</span>
+    <span id="renderer"></span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
