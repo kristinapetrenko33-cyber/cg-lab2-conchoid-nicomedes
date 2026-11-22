@@ -95,18 +95,18 @@ const toWorld = (x, y) => [(x - S.view.ox) / S.view.sc, (y - S.view.oy) / S.view
 
 /* ---------------------------------------------------- 4. рендерер */
 const STYLE = {
-    grid:  { c: [0.15, 0.33, 0.55, 1], w: 1 },
-    major: { c: [0.22, 0.44, 0.70, 1], w: 1 },
-    axisX: { c: [1.0, 0.42, 0.51, 1], w: 1.8 },
-    axisY: { c: [0.49, 0.91, 0.53, 1], w: 1.8 },
-    curve: { c: [1, 1, 1, 1], w: 2.8 },
-    asy:   { c: [1, 0.55, 0.55, 1], w: 1.5, dash: [9, 6] },
-    tan:   { c: [0.5, 0.95, 0.6, 1], w: 1.8 },
-    nor:   { c: [0.45, 0.82, 1, 1], w: 1.8 },
-    circ:  { c: [1, 0.82, 0.4, 1], w: 1.3, dash: [5, 5] },
-    pivot: { c: [1, 0.42, 0.5, 1], w: 1.6 },
-    loop:  { c: [0.45, 0.82, 1, 0.20], w: 0 },
-    dot:   { c: [1, 0.82, 0.4, 1], w: 0 }
+    grid:  { c: [0.17, 0.21, 0.28, 1], w: 1 },
+    major: { c: [0.24, 0.30, 0.39, 1], w: 1 },
+    axisX: { c: [0.95, 0.42, 0.48, 1], w: 1.8 },
+    axisY: { c: [0.25, 0.85, 0.65, 1], w: 1.8 },
+    curve: { c: [0.37, 0.92, 0.83, 1], w: 2.8 },
+    asy:   { c: [0.96, 0.78, 0.36, 1], w: 1.5, dash: [9, 6] },
+    tan:   { c: [1.00, 0.60, 0.28, 1], w: 1.8 },
+    nor:   { c: [0.73, 0.56, 1.00, 1], w: 1.8 },
+    circ:  { c: [0.45, 0.82, 1.00, 1], w: 1.3, dash: [5, 5] },
+    pivot: { c: [0.25, 0.90, 0.80, 1], w: 1.6 },
+    loop:  { c: [0.98, 0.40, 0.58, 0.18], w: 0 },
+    dot:   { c: [1.00, 0.36, 0.52, 1], w: 0 }
 };
 const ORDER = ['loop', 'grid', 'major', 'axisX', 'axisY', 'asy', 'circ', 'curve', 'tan', 'nor', 'pivot', 'dot'];
 const FILLS = new Set(['loop', 'dot']);
@@ -256,7 +256,7 @@ function paint() {
     g2.setTransform(dpr, 0, 0, dpr, 0, 0); g2.clearRect(0, 0, W, H);
     if (gl) {
         gl.viewport(0, 0, glc.width, glc.height);
-        gl.clearColor(0.047, 0.165, 0.302, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.clearColor(0.071, 0.082, 0.110, 1); gl.clear(gl.COLOR_BUFFER_BIT);
         gl.uniform2f(loc.res, W, H); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
         gl.enableVertexAttribArray(loc.p); gl.vertexAttribPointer(loc.p, 2, gl.FLOAT, false, 0, 0);
         for (const k of ORDER) {
@@ -266,7 +266,7 @@ function paint() {
             gl.uniform4fv(loc.col, STYLE[k].c); gl.drawArrays(gl.TRIANGLES, 0, tris.length / 2);
         }
     } else {
-        g2.fillStyle = '#0c2a4d'; g2.fillRect(0, 0, W, H);
+        g2.fillStyle = '#12151c'; g2.fillRect(0, 0, W, H);
         for (const k of ORDER) {
             const s = STYLE[k], col = `rgba(${s.c.slice(0, 3).map(v => v * 255 | 0)},${s.c[3]})`;
             g2.strokeStyle = g2.fillStyle = col; g2.lineWidth = s.w; g2.lineJoin = 'round';
@@ -276,7 +276,7 @@ function paint() {
     }
     for (const [t, x, y, kind] of labels) {
         g2.font = kind === 'mark' ? 'italic 700 15px "Times New Roman", serif' : kind === 'axis' ? 'italic 14px "Times New Roman", serif' : kind === 'asy' ? 'italic 13px Cambria, serif' : '10.5px Consolas, monospace';
-        g2.fillStyle = kind === 'mark' ? '#ffd166' : kind === 'asy' ? '#ff8f8f' : kind === 'axis' ? '#d1ebff' : '#6f9bc9';
+        g2.fillStyle = kind === 'mark' ? '#ff6b8b' : kind === 'asy' ? '#f5c75d' : kind === 'axis' ? '#cfe9e5' : '#788fa6';
         g2.fillText(t, x, H - y);
     }
     report();
